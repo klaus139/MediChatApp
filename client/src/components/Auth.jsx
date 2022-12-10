@@ -24,6 +24,62 @@ const Auth = () => {
                                 />
                             </div>
                         )}
+                        <div className='auth__form-container_fields-content_input'>
+                                <label htmlFor='username'> Username</label>
+                                <input
+                                    name='username'
+                                    type='text'
+                                    placeholder='Username'
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            {isSignup && (
+                            <div className='auth__form-container_fields-content_input'>
+                                <label htmlFor='fullName'> Phone Number</label>
+                                <input
+                                    name='phoneNumber'
+                                    type='text'
+                                    placeholder='Phone Number'
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        )}
+                        {isSignup && (
+                            <div className='auth__form-container_fields-content_input'>
+                                <label htmlFor='avatarUrl'> Avatar url</label>
+                                <input
+                                    name='avatarUrl'
+                                    type='text'
+                                    placeholder='Avatar URL'
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        )}
+                        <div className='auth__form-container_fields-content_input'>
+                                <label htmlFor='password'>Password</label>
+                                <input
+                                    name='password'
+                                    type='password'
+                                    placeholder='password'
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        {isSignup && (
+                            <div className='auth__form-container_fields-content_input'>
+                                <label htmlFor='confirmPassword'>Confirm Password</label>
+                                <input
+                                    name='ConfirmPassword'
+                                    type='password'
+                                    placeholder='Confirm Password'
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>
