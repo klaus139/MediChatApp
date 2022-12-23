@@ -19,7 +19,7 @@ if (authToken) {
     id: cookies.get("userId"),
     name: cookies.get("userName"),
     fullName: cookies.get("fullName"),
-    image: cookies.get("avatarUrl"),
+    image: cookies.get("avatarURL"),
     hashedPassword: cookies.get("hashedPassword"),
     phoneNumber: cookies.get("phoneNumber"),
   }, authToken);
