@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
-//import cookies from 'universal-cookie';
-//import axios from 'axios';
+import Cookies from 'universal-cookie';
+import axios from 'axios';
 import signinImage from '../assets/signup3.webp';
+
+const cookies = new Cookies();
 
 const initialState = {
     fullName:'',
@@ -15,19 +17,40 @@ const initialState = {
 const Auth = () => {
     const [form, setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(true)
+
     const handleChange = (e) => {
         setForm({...form, [e.target.name]: e.target.value})
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
 
-        console.log(form)
+        const { fullName, userName, password, phoneNumber, avatarURL} = form;
+
+        const URL = 'http://localhost:5000/auth'
+
+        const { data: {token, userId, hashedPassword} } = 
+        await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`,{
+            userName, password, fullName, phoneNumber, avatarURL,
+        })
+        cookies.set('token', token);
+        cookies.set('userName', userName);
+        cookies.set('fullName', fullName);
+        cookies.set('userId', userId);
+
+        if(isSignup){
+            cookies.set('phoneNumber', phoneNumber);
+            cookies.set('avatarURL', avatarURL);
+            cookies.set('hashedPassword', hashedPassword);
+        }
+
+        window.location.reload();
     };
 
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup);
     }
+
     return (
         <div className='auth__form-container'>
             <div className='auth__form-container_fields'>
@@ -47,11 +70,11 @@ const Auth = () => {
                             </div>
                         )}
                         <div className='auth__form-container_fields-content_input'>
-                                <label htmlFor='username'> Username</label>
+                                <label htmlFor='userName'> UserName</label>
                                 <input
-                                    name='username'
+                                    name='userName'
                                     type='text'
-                                    placeholder='Username'
+                                    placeholder='UserName'
                                     onChange={handleChange}
                                     required
                                 />

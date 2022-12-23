@@ -5,6 +5,8 @@ import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
 import HospitalIcon from '../assets/hospital.png';
 import LogoutIcon from '../assets/logout.png';
 
+const cookies = new Cookies();
+
 
 const Sidebar = () => (
     <div className="channel-list__sidebar">
@@ -29,6 +31,17 @@ const CompanyHeader = () => (
 )
 
 const ChannelListContainer = () => {
+    const logout = () => {
+        cookies.removes("token");
+        cookies.removes("userId");
+        cookies.removes("userName");
+        cookies.removes("fullName");
+        cookies.removes("avatarUrl");
+        cookies.removes("hashedPassword");
+        cookies.removes("phoneNumber");
+
+        window.location.reload(); // this reloads the page
+    }
 
   return (
    <>
